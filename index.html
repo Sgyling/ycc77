@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 引入粒子背景库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <!-- 配置Tailwind自定义颜色和字体 -->
     <script>
@@ -15,13 +17,15 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3B82F6',
+                        primary: '#4F46E5', // 深紫蓝色，更现代感
                         secondary: '#10B981',
-                        dark: '#1E293B',
-                        light: '#F8FAFC'
+                        accent: '#F59E0B',
+                        dark: '#111827',
+                        light: '#F9FAFB'
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
                     },
                 }
             }
@@ -32,13 +36,34 @@
     <style type="text/tailwindcss">
         @layer utilities {
             .text-shadow {
-                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+            .bg-grid {
+                background-size: 40px 40px;
+                background-image: 
+                    linear-gradient(to right, rgba(79, 70, 229, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(79, 70, 229, 0.05) 1px, transparent 1px);
             }
             .animate-float {
                 animation: float 6s ease-in-out infinite;
             }
-            .bg-gradient-custom {
-                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            .animate-pulse-slow {
+                animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+            .animate-fade-in-up {
+                animation: fadeInUp 1s ease forwards;
+            }
+            .animate-typewriter {
+                overflow: hidden;
+                border-right: 0.15em solid #4F46E5;
+                white-space: nowrap;
+                margin: 0 auto;
+                animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
             }
         }
         
@@ -47,122 +72,298 @@
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
         }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #4F46E5 }
+        }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-custom flex items-center justify-center p-4 font-sans text-dark">
+<body class="min-h-screen bg-dark text-light overflow-x-hidden">
+    <!-- 粒子背景容器 -->
+    <div id="particles-js" class="fixed inset-0 z-0 opacity-70"></div>
+    
+    <!-- 网格背景 -->
+    <div class="fixed inset-0 z-10 bg-grid opacity-30"></div>
+    
     <!-- 主容器 -->
-    <div class="max-w-4xl w-full mx-auto text-center">
-        <!-- 装饰元素 - 左上角 -->
-        <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-primary/10 animate-float hidden md:block"></div>
-        <!-- 装饰元素 - 右下角 -->
-        <div class="absolute bottom-10 right-10 w-32 h-32 rounded-full bg-secondary/10 animate-float" style="animation-delay: 2s;"></div>
+    <div class="relative z-20 max-w-5xl w-full mx-auto px-4 py-16 md:py-24 flex flex-col items-center justify-center min-h-screen">
+        <!-- 装饰元素 -->
+        <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary/20 animate-float hidden lg:block"></div>
+        <div class="absolute bottom-20 right-10 w-40 h-40 rounded-full bg-accent/20 animate-float" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-secondary/20 animate-float" style="animation-delay: 4s;"></div>
         
         <!-- 站点Logo/图标 -->
-        <div class="mb-8">
-            <div class="w-20 h-20 mx-auto bg-primary/20 rounded-full flex items-center justify-center">
-                <i class="fa fa-code text-3xl text-primary"></i>
+        <div class="mb-12 opacity-0 animate-fade-in-up" style="animation-delay: 0.3s;">
+            <div class="w-24 h-24 md:w-32 md:h-32 mx-auto bg-primary/10 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10 transform transition-all duration-500 hover:scale-110 hover:shadow-primary/20">
+                <i class="fa fa-code text-4xl md:text-5xl text-primary animate-pulse-slow"></i>
             </div>
         </div>
         
         <!-- 主标题 -->
-        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6 leading-tight text-shadow transition-all duration-300 hover:text-primary">
-            杨CC技术文章站点
+        <h1 class="text-[clamp(2.5rem,8vw,4.5rem)] font-bold mb-6 leading-tight text-shadow opacity-0 animate-fade-in-up" style="animation-delay: 0.6s;">
+            <span class="bg-gradient-to-r from-primary to-blue-400 text-gradient">杨CC技术文章站点</span>
         </h1>
         
-        <!-- 副标题 -->
-        <p class="text-[clamp(1.2rem,3vw,1.8rem)] text-gray-600 mb-10 transition-all duration-300">
-            ...即将开放
+        <!-- 副标题 - 打字效果 -->
+        <p class="text-[clamp(1.2rem,4vw,2.2rem)] text-gray-300 mb-12 font-mono max-w-xl mx-auto opacity-0 animate-fade-in-up" style="animation-delay: 0.9s;">
+            <span class="animate-typewriter">...即将开放</span>
         </p>
         
         <!-- 简短说明 -->
-        <p class="text-gray-500 max-w-lg mx-auto mb-10 text-lg">
-            专注于分享技术见解、编程技巧与行业动态，敬请期待！
+        <p class="text-gray-400 max-w-lg mx-auto mb-12 text-lg leading-relaxed opacity-0 animate-fade-in-up" style="animation-delay: 1.2s;">
+            专注于分享前沿技术见解、实用编程技巧与深度行业动态，打造高质量技术内容平台。
         </p>
         
         <!-- 通知订阅区 -->
-        <div class="max-w-md mx-auto mb-12">
-            <form class="flex flex-col sm:flex-row gap-3">
+        <div class="max-w-md w-full mx-auto mb-16 opacity-0 animate-fade-in-up" style="animation-delay: 1.5s;">
+            <form class="flex flex-col sm:flex-row gap-4">
                 <input 
                     type="email" 
-                    placeholder="输入您的邮箱以获取通知" 
-                    class="flex-1 px-5 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                    placeholder="输入您的邮箱以获取上线通知" 
+                    class="flex-1 px-6 py-4 rounded-xl border border-gray-700 bg-dark/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 placeholder-gray-500"
                     required
                 >
                 <button 
                     type="submit" 
-                    class="px-6 py-3 bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all transform hover:scale-105"
+                    class="px-8 py-4 bg-primary hover:bg-primary/90 text-white rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2"
                 >
-                    订阅通知
+                    <span>订阅通知</span>
+                    <i class="fa fa-paper-plane"></i>
                 </button>
             </form>
         </div>
         
+        <!-- 倒计时 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16 w-full max-w-2xl mx-auto opacity-0 animate-fade-in-up" style="animation-delay: 1.8s;">
+            <div class="bg-dark/30 backdrop-blur-sm rounded-xl p-4 border border-gray-800 text-center transform transition-all duration-300 hover:scale-105 hover:border-primary/30">
+                <div id="days" class="text-3xl md:text-4xl font-bold text-primary">00</div>
+                <div class="text-gray-400 text-sm mt-1">天</div>
+            </div>
+            <div class="bg-dark/30 backdrop-blur-sm rounded-xl p-4 border border-gray-800 text-center transform transition-all duration-300 hover:scale-105 hover:border-primary/30">
+                <div id="hours" class="text-3xl md:text-4xl font-bold text-primary">00</div>
+                <div class="text-gray-400 text-sm mt-1">时</div>
+            </div>
+            <div class="bg-dark/30 backdrop-blur-sm rounded-xl p-4 border border-gray-800 text-center transform transition-all duration-300 hover:scale-105 hover:border-primary/30">
+                <div id="minutes" class="text-3xl md:text-4xl font-bold text-primary">00</div>
+                <div class="text-gray-400 text-sm mt-1">分</div>
+            </div>
+            <div class="bg-dark/30 backdrop-blur-sm rounded-xl p-4 border border-gray-800 text-center transform transition-all duration-300 hover:scale-105 hover:border-primary/30">
+                <div id="seconds" class="text-3xl md:text-4xl font-bold text-primary">00</div>
+                <div class="text-gray-400 text-sm mt-1">秒</div>
+            </div>
+        </div>
+        
         <!-- 社交媒体链接 -->
-        <div class="flex justify-center gap-6 mb-10">
-            <a href="#" class="text-gray-500 hover:text-primary text-xl transition-colors">
-                <i class="fa fa-github"></i>
+        <div class="flex justify-center gap-6 md:gap-8 mb-12 opacity-0 animate-fade-in-up" style="animation-delay: 2.1s;">
+            <a href="#" class="w-12 h-12 rounded-full bg-dark/30 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-primary hover:bg-dark/50 border border-transparent hover:border-primary/30 transition-all duration-300 transform hover:scale-110">
+                <i class="fa fa-github text-xl"></i>
             </a>
-            <a href="#" class="text-gray-500 hover:text-primary text-xl transition-colors">
-                <i class="fa fa-twitter"></i>
+            <a href="#" class="w-12 h-12 rounded-full bg-dark/30 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-primary hover:bg-dark/50 border border-transparent hover:border-primary/30 transition-all duration-300 transform hover:scale-110">
+                <i class="fa fa-twitter text-xl"></i>
             </a>
-            <a href="#" class="text-gray-500 hover:text-primary text-xl transition-colors">
-                <i class="fa fa-linkedin"></i>
+            <a href="#" class="w-12 h-12 rounded-full bg-dark/30 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-primary hover:bg-dark/50 border border-transparent hover:border-primary/30 transition-all duration-300 transform hover:scale-110">
+                <i class="fa fa-linkedin text-xl"></i>
             </a>
-            <a href="#" class="text-gray-500 hover:text-primary text-xl transition-colors">
-                <i class="fa fa-weixin"></i>
+            <a href="#" class="w-12 h-12 rounded-full bg-dark/30 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-primary hover:bg-dark/50 border border-transparent hover:border-primary/30 transition-all duration-300 transform hover:scale-110">
+                <i class="fa fa-weixin text-xl"></i>
             </a>
         </div>
         
         <!-- 页脚 -->
-        <footer class="text-gray-400 text-sm">
-            <p>&copy; 2023 杨CC技术文章站点. 保留所有权利.</p>
+        <footer class="text-gray-500 text-sm opacity-0 animate-fade-in-up" style="animation-delay: 2.4s;">
+            <p>&copy; <span id="current-year"></span> 杨CC技术文章站点. 保留所有权利.</p>
         </footer>
     </div>
     
-    <!-- 简单的交互脚本 -->
+    <!-- 交互脚本 -->
     <script>
-        // 添加页面载入动画
+        // 初始化粒子背景
         document.addEventListener('DOMContentLoaded', () => {
-            const mainContent = document.querySelector('div.max-w-4xl');
-            mainContent.classList.add('opacity-0', 'translate-y-10');
+            // 设置当前年份
+            document.getElementById('current-year').textContent = new Date().getFullYear();
             
-            setTimeout(() => {
-                mainContent.classList.add('transition-all', 'duration-1000', 'ease-out');
-                mainContent.classList.remove('opacity-0', 'translate-y-10');
-            }, 100);
-        });
-        
-        // 表单提交处理
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const emailInput = e.target.querySelector('input[type="email"]');
-            const submitButton = e.target.querySelector('button');
+            // 粒子配置
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#4F46E5"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.2,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#4F46E5",
+                        "opacity": 0.1,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.3
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 3
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
             
-            // 保存原始按钮文本
-            const originalText = submitButton.innerHTML;
-            
-            // 显示加载状态
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 提交中...';
-            
-            // 模拟API请求
-            setTimeout(() => {
-                submitButton.innerHTML = '<i class="fa fa-check mr-2"></i> 订阅成功!';
-                submitButton.classList.remove('bg-primary');
-                submitButton.classList.add('bg-secondary');
+            // 倒计时功能
+            function updateCountdown() {
+                // 设置目标日期（示例：30天后）
+                const targetDate = new Date();
+                targetDate.setDate(targetDate.getDate() + 30);
                 
-                // 重置表单
-                emailInput.value = '';
+                const now = new Date();
+                const diff = targetDate - now;
                 
-                // 恢复按钮状态
+                // 计算天、时、分、秒
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                // 更新DOM
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            // 初始化倒计时并每秒更新
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // 表单提交处理
+            document.querySelector('form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = e.target.querySelector('input[type="email"]');
+                const submitButton = e.target.querySelector('button');
+                
+                // 保存原始按钮文本
+                const originalText = submitButton.innerHTML;
+                
+                // 显示加载状态
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 提交中...';
+                
+                // 模拟API请求
                 setTimeout(() => {
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = originalText;
-                    submitButton.classList.remove('bg-secondary');
-                    submitButton.classList.add('bg-primary');
-                }, 3000);
-            }, 1500);
+                    submitButton.innerHTML = '<i class="fa fa-check mr-2"></i> 订阅成功!';
+                    submitButton.classList.remove('bg-primary');
+                    submitButton.classList.add('bg-secondary');
+                    
+                    // 重置表单
+                    emailInput.value = '';
+                    
+                    // 添加成功动画
+                    submitButton.classList.add('animate-pulse');
+                    
+                    // 恢复按钮状态
+                    setTimeout(() => {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalText;
+                        submitButton.classList.remove('bg-secondary', 'animate-pulse');
+                        submitButton.classList.add('bg-primary');
+                    }, 3000);
+                }, 1500);
+            });
+            
+            // 滚动动画效果
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.animate-fade-in-up');
+                
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = 1;
+                    }
+                });
+            };
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // 初始检查
         });
     </script>
 </body>
 </html>
+    
