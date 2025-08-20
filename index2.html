@@ -24,12 +24,12 @@
 
 
 <!-- Canonical URL -->
-<link rel="canonical" href="http://example.com/categories/index.html">
+<link rel="canonical" href="http://example.com/index.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/categories/index.html">
+<meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Hexo">
 
 <meta property="og:description" content="杨CC的技术文章站点">
@@ -148,7 +148,7 @@
         <div class="hidden md:flex items-center gap-2">
           
             
-            <a class="px-4 py-2 text-base font-medium rounded-md text-[var(--text-secondary-color)] hover:bg-[var(--secondary-color)] hover:text-[var(--text-primary-color)] transition-colors" 
+            <a class="px-4 py-2 text-base font-medium rounded-md bg-[var(--secondary-color)] text-[var(--text-primary-color)] transition-colors" 
                href="/">首页</a>
           
             
@@ -156,7 +156,7 @@
                href="/tags/">标签</a>
           
             
-            <a class="px-4 py-2 text-base font-medium rounded-md bg-[var(--secondary-color)] text-[var(--text-primary-color)] transition-colors" 
+            <a class="px-4 py-2 text-base font-medium rounded-md text-[var(--text-secondary-color)] hover:bg-[var(--secondary-color)] hover:text-[var(--text-primary-color)] transition-colors" 
                href="/categories/">分类</a>
           
             
@@ -184,7 +184,7 @@
         <div class="px-4 py-2 space-y-1">
           
             
-            <a class="block px-4 py-3 text-base font-medium rounded-md text-[var(--text-secondary-color)] hover:bg-[var(--secondary-color)] hover:text-[var(--text-primary-color)] transition-colors" 
+            <a class="block px-4 py-3 text-base font-medium rounded-md bg-[var(--secondary-color)] text-[var(--text-primary-color)] transition-colors" 
                href="/">首页</a>
           
             
@@ -192,7 +192,7 @@
                href="/tags/">标签</a>
           
             
-            <a class="block px-4 py-3 text-base font-medium rounded-md bg-[var(--secondary-color)] text-[var(--text-primary-color)] transition-colors" 
+            <a class="block px-4 py-3 text-base font-medium rounded-md text-[var(--text-secondary-color)] hover:bg-[var(--secondary-color)] hover:text-[var(--text-primary-color)] transition-colors" 
                href="/categories/">分类</a>
           
             
@@ -209,46 +209,77 @@
   </div>
 </header>
     
-    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div class="max-w-4xl mx-auto">
-        <header class="mb-12">
-          <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
-            All Categories
-          </h1>
-          <p class="text-[var(--text-secondary-color)] text-lg">
-            Browse posts by category
-          </p>
-        </header>
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-            <div class="group">
-              <a href="/categories/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/" 
-                 class="block p-6 bg-[var(--secondary-color)] rounded-lg hover:bg-[var(--primary-color)] transition-colors duration-300">
-                <h2 class="text-xl font-bold mb-2 group-hover:text-white">
-                  电子取证
-                </h2>
-                <p class="text-[var(--text-secondary-color)] group-hover:text-white/80">
-                  1 post
-                </p>
-                
-                <!-- Show latest posts in this category -->
-                
-                  <div class="mt-4 space-y-2">
-                    
-                      <div class="text-sm text-[var(--text-secondary-color)] group-hover:text-white/70 truncate">
-                        测试文章
-                      </div>
-                    
-                  </div>
-                
-              </a>
-            </div>
-          
-        </div>
+          <!-- Reusable post card component -->
+<article class="group">
+  <div class="overflow-hidden rounded-lg mb-5">
+    
+      <div class="w-full aspect-[3/2] bg-[var(--secondary-color)] rounded-lg group-hover:scale-105 transition-transform duration-500 ease-in-out flex items-center justify-center overflow-hidden post-card-cover">
+        <img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" 
+             alt="测试文章" 
+             class="max-w-full max-h-full w-auto h-auto object-contain rounded-lg post-card-cover-image"
+             loading="lazy"
+             onload="this.style.opacity='1'"
+             style="opacity: 0; transition: opacity 0.3s ease;">
+      </div>
+    
+  </div>
+  
+  <div class="mb-3">
+    
+      <div class="flex gap-2 mb-2">
         
+          <a href="/categories/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/" 
+             class="text-xs px-2 py-1 bg-[var(--primary-color)] text-white rounded-full hover:bg-opacity-80 transition-colors">
+            电子取证
+          </a>
         
       </div>
+    
+    
+    <h2 class="text-xl sm:text-2xl font-bold leading-normal tracking-tight mb-2">
+      <a class="hover:text-[var(--primary-color)] transition-colors" href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/">
+        测试文章
+      </a>
+    </h2>
+    
+    <div class="flex items-center gap-4 text-sm text-[var(--text-secondary-color)] mb-3">
+      <time datetime="2025-08-20T09:26:30.000Z">
+        Aug 20, 2025
+      </time>
+      <span>•</span>
+      <span>1 min read</span>
+    </div>
+  </div>
+  
+  <p class="text-[var(--text-secondary-color)] text-base sm:text-lg leading-relaxed">
+    
+
+  </p>
+  
+  
+    <div class="flex flex-wrap gap-2 mt-4">
+      
+        <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" 
+           class="text-xs text-[var(--text-secondary-color)] hover:text-[var(--primary-color)] transition-colors whitespace-nowrap">
+          #浏览器
+        </a>
+      
+        <a href="/tags/%E5%8F%96%E8%AF%81%E6%8A%80%E6%9C%AF/" 
+           class="text-xs text-[var(--text-secondary-color)] hover:text-[var(--primary-color)] transition-colors whitespace-nowrap">
+          #取证技术
+        </a>
+      
+    </div>
+  
+</article>
+        
+      </div>
+      
+      <!-- Pagination component -->
+
     </main>
     
     <footer class="bg-[var(--background-color)] border-t border-[var(--border-color)]">
