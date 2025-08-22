@@ -1,182 +1,360 @@
-<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>杨CC 技术录 - 杨CC的技术文章站点</title><meta name="author" content="杨CC"><meta name="copyright" content="杨CC"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这是一个非常不错的技术文章站点,包含森罗万物">
-<meta property="og:type" content="website">
-<meta property="og:title" content="杨CC 技术录">
-<meta property="og:url" content="https://ycc77.com/index.html">
-<meta property="og:site_name" content="杨CC 技术录">
-<meta property="og:description" content="这是一个非常不错的技术文章站点,包含森罗万物">
-<meta property="og:locale">
-<meta property="og:image" content="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png">
-<meta property="article:author" content="杨CC">
-<meta property="article:tag" content="黑客,技术,技术文章,渗透工具,发展中...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png"><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "杨CC 技术录",
-  "url": "https://ycc77.com/"
-}</script><link rel="shortcut icon" href="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png"><link rel="canonical" href="https://ycc77.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
 
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
-  
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>杨CC 技术录</title>
+    <meta name="author" content="杨CC" />
+    <meta name="description" content="这是一个非常不错的技术文章站点,包含森罗万物" />
+    <meta name="keywords" content="黑客,技术,技术文章,渗透工具,发展中..." />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
 
-      const theme = saveToLocal.get('theme')
-    
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="/js/lib/home.js"></script>
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>杨CC 技术录</span>
+        </a>
         
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
-    
-      
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-  
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
-  copy: {
-    success: 'Copy Successful',
-    error: 'Copy Failed',
-    noSupport: 'Browser Not Supported'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: 'Just now',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: undefined,
-  lightbox: 'null',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: 'Load More'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '杨CC 技术录',
-  isHighlightShrink: false,
-  isToc: false,
-  pageType: 'home'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于我</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page fixed" id="page-header" style="background-image: url(https://pic1.imgdb.cn/item/68a745e258cb8da5c8414dea.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" alt="Logo"><span class="site-name">杨CC 技术录</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">杨CC 技术录</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/Sgyling" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2025/08/21/1-%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B71_%E5%92%B8%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/" title="一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程"><img class="post-bg" src="https://pic1.imgdb.cn/item/68a725f358cb8da5c84137f9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/08/21/1-%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B71_%E5%92%B8%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/" title="一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程">一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-08-21T09:26:30.000Z" title="Created 2025-08-21 17:26:30">2025-08-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B7/">电商工具</a></span></div><div class="content">1-简介​	一个功能完整的闲鱼自动回复和管理系统，支持多用户、多账号管理，具备智能回复、自动发货、自动确认发货、商品管理等企业级功能。 ​	**注意:**工具演示在5.2 ​	首先,该工具是免费的,无需收费的. ​	任何花钱购买的工具,请全部申请退款!  2-核心特性🔐 多用户系统 用户注册登录 - 支持邮箱验证码注册，图形验证码保护 数据完全隔离 - 每个用户的数据独立存储，互不干扰 权限管理 - 严格的用户权限控制和JWT认证 安全保护 - 防暴力破解、会话管理、安全日志  📱 多账号管理 无限账号支持 - 每个用户可管理多个闲鱼账号 独立运行 - 每个账号独立监控，互不影响 实时状态 - 账号连接状态实时监控 批量操作 - 支持批量启动、停止账号任务  🤖 智能回复系统 关键词匹配 - 支持精确关键词匹配回复 指定商品回复 - 支持为特定商品设置专门的回复内容，优先级最高 商品专用关键词 - 支持为特定商品设置专用关键词回复 通用关键词 - 支持全局通用关键词，适用于所有商品 批量导入导出 - 支持Excel格式的关键词批量导入导出 AI智能回复 - 集成OpenAI...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/" title="测试文章"><img class="post-bg" src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试文章"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/" title="测试文章">测试文章</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-08-20T09:26:30.000Z" title="Created 2025-08-20 17:26:30">2025-08-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/">电子取证</a></span></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">杨CC</div><div class="author-info-description">这是一个非常不错的技术文章站点,包含森罗万物</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SGYLING"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Sgyling" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">有任何疑惑或者需要投稿,请联系:<br>
-微信: Yancy_76<br>
-或 QQ: 1041041042 <br>
-QQ交流群: 660264846 <br>
-你们会请我喝咖啡的对吧?<br>
-<img src="img/cb5a3c6810a8b8939c072f73afab3144.jpg" style="width:200px;">
-</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/21/1-%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B71_%E5%92%B8%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/" title="一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程"><img src="https://pic1.imgdb.cn/item/68a725f358cb8da5c84137f9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程"/></a><div class="content"><a class="title" href="/2025/08/21/1-%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B71_%E5%92%B8%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/" title="一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程">一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程</a><time datetime="2025-08-21T09:26:30.000Z" title="Created 2025-08-21 17:26:30">2025-08-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/" title="测试文章"><img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试文章"/></a><div class="content"><a class="title" href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/" title="测试文章">测试文章</a><time datetime="2025-08-20T09:26:30.000Z" title="Created 2025-08-20 17:26:30">2025-08-20</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>Categories</span>
-            
-          </div>
-          <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">电商工具</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/"><span class="card-category-list-name">电子取证</span><span class="card-category-list-count">1</span></a></li>
-          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E9%97%B2%E9%B1%BC/" style="font-size: 1.1em; color: #999">闲鱼</a> <a href="/tags/%E5%8F%96%E8%AF%81%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">取证技术</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 1.1em; color: #999">浏览器</a></div></div><div class="card-widget card-archives">
-    <div class="item-headline">
-      <i class="fas fa-archive"></i>
-      <span>Archives</span>
-      
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于我</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;杨CC 技术录</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于我</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="https://pic1.imgdb.cn/item/68a7ff2358cb8da5c8422ed0.png"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>杨CC 技术录</h1>
+                <h3>杨CC的技术文章站点</h3>
+                <h5>这是一个非常不错的技术文章站点,包含森罗万物</h5>
+            </div>
+        </span>
     </div>
-  
-    <ul class="card-archive-list">
-      
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2025/08/">
-            <span class="card-archive-list-date">
-              August 2025
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2025/08/21/1-%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B71_%E5%92%B8%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/">
+        <h2 class="post-title">一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B7/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                电商工具
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            <span class="card-archive-list-count">2</span>
-          </a>
-        </li>
-      
-    </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-08-21T16:41:41.807Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By 杨CC</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+            2025/8/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>闲鱼自动发货,自动回复,支持发虚拟货</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E9%97%B2%E9%B1%BC/" style="color: #03a9f4">闲鱼</a>
+        </span>
+        
+    </div>
+    <a href="/2025/08/21/1-%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B71_%E5%92%B8%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/">
+        <h2 class="post-title">测试文章</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                电子取证
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/8/20
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Google浏览器取证底层技术</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="color: #03a9f4">浏览器</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8F%96%E8%AF%81%E6%8A%80%E6%9C%AF/" style="color: #ff7d73">取证技术</a>
+        </span>
+        
+    </div>
+    <a href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
+    
+    <span class="current">1</span>
+    
+    
+    
+    
+</div>
+
+    </div>
+    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" alt="avatar" />
+        </div>
+        <div class="name">杨CC</div>
+        <div class="description">
+            <p>任何疑惑或者需要投稿,请联系:<br><br>微信: Yancy_76<br><br>或 QQ: 1041041042 <br><br>QQ交流群: 660264846 <br><br>你们会请我喝咖啡的对吧?<br><br><img src="img/cb5a3c6810a8b8939c072f73afab3144.jpg" style="width:200px;"><br>…</p>
+
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a href="https://ycc77.com">杨CC 技术录</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://yancy77.cn">杨CC的资源站</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 杨CC 技术录
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;杨CC
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+</body>
+</html>
