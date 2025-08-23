@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: 电子取证 | 杨CC 技术录</title>
+    <title>幻影（Phantom）SRC漏洞挖掘辅助工具 | 杨CC 技术录</title>
     <meta name="author" content="杨CC" />
     <meta name="description" content="这是一个非常不错的技术文章站点,包含森罗万物" />
     <meta name="keywords" content="黑客,技术,技术文章,渗透工具,发展中，疯狂的杨CC， ..." />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -150,14 +154,20 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
+            <div class="article">
+    <div>
+        <h1>幻影（Phantom）SRC漏洞挖掘辅助工具</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/8/23
+        </span>
         
-        
-        
-        <span>
-            <a href="/categories/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" style="background: #ffa2c4">
+        <span class="category">
+            <a href="/categories/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -166,76 +176,110 @@
         </span>
         
         
-        
-        <span>
-            <a href="/categories/%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B7/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                电商工具
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/" style="color: #ff7d73">
+                    浏览器插件
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/SRC%E6%8C%96%E6%8E%98/" style="color: #ffa2c4">
+                    SRC挖掘
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/categories/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                电子取证
-            </a>
-        </span>
-        
-        
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/8/20</div>
-            <a href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/">
-                <h3>测试文章</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        电子取证
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="color: #ffa2c4">
-                            浏览器
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E5%8F%96%E8%AF%81%E6%8A%80%E6%9C%AF/" style="color: #ff7d73">
-                            取证技术
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1- 简介"></a>1- 简介</h1><p>​	主要用于SRC的漏洞挖掘.</p>
+<p>​	所处位置:<a target="_blank" rel="noopener" href="https://yancy77.cn/penetration.html">https://yancy77.cn/penetration.html</a>  -&gt; 插件\扩展板块 -&gt;幻影(Phantom) SRC漏洞挖掘辅助工具</p>
+<h1 id="2-特性概览"><a href="#2-特性概览" class="headerlink" title="2- 特性概览"></a>2- 特性概览</h1><ul>
+<li>一键基础扫描：自动提取页面内的API、URL、域名、邮箱、手机号、路径、参数、注释、多类Token&#x2F;Key等</li>
+<li>深度梯度扫描：梯度链接&#x2F;资源爬取，支持梯度、超时配置，并在新闻中运行，不阻塞当前操作</li>
+<li>批量API测试：对扫描到的分类入口进行GET&#x2F;POST批量测量，并发与超时可配置，结果支持复制</li>
+<li>导出能力：支持JSON与Excel（.xls XML格式）两种导出</li>
+<li>自定义规则则：内置丰富的默认规则，可在「设置」中按分类自定义规则则并即时生效</li>
+<li>Cookie支持：可一键获取当前站点Cookie并保存，然后需要鉴权的请求场景</li>
+<li>去重与过滤：内置强化过滤器（域名&#x2F;邮箱&#x2F;手机号&#x2F;API），减少误报</li>
+<li>自动与增量：页面加载、DOM变化与定时策略触发静默扫描；深度扫描过程中分层&#x2F;分批实时合并与展示</li>
+</ul>
+<h1 id="3-安装"><a href="#3-安装" class="headerlink" title="3- 安装"></a>3- 安装</h1><h2 id="3-1-有git命令的安装方式"><a href="#3-1-有git命令的安装方式" class="headerlink" title="3.1 有git命令的安装方式"></a>3.1 有git命令的安装方式</h2><p>打开终端,进入想下载的目录,运行:</p>
+<ul>
+<li><p>git clone <a target="_blank" rel="noopener" href="https://github.com/Team-intN18-SoybeanSeclab/Phantom.git">https://github.com/Team-intN18-SoybeanSeclab/Phantom.git</a></p>
+</li>
+<li><p><img src="https://pic1.imgdb.cn/item/68a97e3758cb8da5c8466668.png"></p>
+</li>
+<li><p>打开google浏览器或者edge浏览器扩展插件页面</p>
+</li>
+<li><p><img src="https://pic1.imgdb.cn/item/68a97e8958cb8da5c846667f.png"></p>
+</li>
+<li><p>然后选择对应的文件夹</p>
+</li>
+<li><p><img src="https://pic1.imgdb.cn/item/68a97ee458cb8da5c846668a.png"></p>
+</li>
+<li><p><img src="https://pic1.imgdb.cn/item/68a97f0058cb8da5c846668e.png"></p>
+</li>
+<li><p>将这个工具固定在插件栏即可.</p>
+</li>
+<li><p>随后,即可正常使用了</p>
+</li>
+<li><p><img src="https://pic1.imgdb.cn/item/68a97f2658cb8da5c8466692.png"></p>
+</li>
+</ul>
+<h2 id="3-2-没有git命令的安装方式"><a href="#3-2-没有git命令的安装方式" class="headerlink" title="3.2 没有git命令的安装方式"></a>3.2 没有git命令的安装方式</h2><ul>
+<li>点击下方链接,进行下载</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Team-intN18-SoybeanSeclab/Phantom/releases/download/1.6.7/Phantom.v1.6.7.zip">https://github.com/Team-intN18-SoybeanSeclab/Phantom/releases/download/1.6.7/Phantom.v1.6.7.zip</a></li>
+<li>下载完成后,打开浏览器的插件页面</li>
+<li>随后将文件解压出来,在浏览器中加载已解压的扩展程序.</li>
+<li>选择对应的目录,即可安装该插件</li>
+<li><img src="https://pic1.imgdb.cn/item/68a97ee458cb8da5c846668a.png"></li>
+</ul>
+<h1 id="4-使用教程"><a href="#4-使用教程" class="headerlink" title="4- 使用教程"></a>4- 使用教程</h1><ul>
+<li>基础扫描</li>
+<li><img src="https://pic1.imgdb.cn/item/68a9813758cb8da5c8467254.png"></li>
+<li><img src="https://pic1.imgdb.cn/item/68a9815558cb8da5c8467259.png"></li>
+<li>深度扫描</li>
+<li><img src="https://pic1.imgdb.cn/item/68a9816f58cb8da5c846725b.png"></li>
+<li><img src="https://pic1.imgdb.cn/item/68a9818858cb8da5c846725e.png"></li>
+<li>批量API测试</li>
+<li><img src="https://pic1.imgdb.cn/item/68a981c458cb8da5c84672ba.png"></li>
+<li><img src="https://pic1.imgdb.cn/item/68a981d958cb8da5c84672c0.png"></li>
+<li>导出文件</li>
+<li><img src="https://pic1.imgdb.cn/item/68a981fa58cb8da5c84672c6.png"></li>
+<li>自定义正则表达式</li>
+<li><img src="https://pic1.imgdb.cn/item/68a9821358cb8da5c84672cf.png"></li>
+<li>指定Cookie</li>
+<li><img src="https://pic1.imgdb.cn/item/68a9822f58cb8da5c84672d7.png"></li>
+<li>关于界面</li>
+<li><img src="https://pic1.imgdb.cn/item/68a9828c58cb8da5c84672e4.png"></li>
+</ul>
+<h1 id="5-结束语"><a href="#5-结束语" class="headerlink" title="5- 结束语"></a>5- 结束语</h1><ul>
+<li>需要技术文章,记得将ycc77.com 添加到书签栏哦~</li>
+<li>需要资源,记得将yancy77.cn 添加到书签栏哦~</li>
+<li>B站: 疯狂的杨CC(需要使用视频,请选择这个)</li>
+<li>抖音: 疯狂的杨CC</li>
+<li>快手: 疯狂的杨CC</li>
+<li>91: 疯狂的杨CC</li>
+<li>p站: 疯狂的杨CC</li>
+</ul>
+
     </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -268,6 +312,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>

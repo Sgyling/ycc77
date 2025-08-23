@@ -184,14 +184,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/" style="color: #03a9f4">
+                <a href="/tags/%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/" style="color: #00a596">
                     工具教程
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/%E9%97%B2%E9%B1%BC/" style="color: #00a596">
+                <a href="/tags/%E9%97%B2%E9%B1%BC/" style="color: #00bcd4">
                     闲鱼
                 </a>
             </span>
@@ -424,28 +424,108 @@
 <li><strong>Docker Compose</strong>: 2.0+ (Docker部署)</li>
 </ul>
 <h2 id="4-1-小白安装-安装即用"><a href="#4-1-小白安装-安装即用" class="headerlink" title="4.1 小白安装(安装即用)"></a>4.1 小白安装(安装即用)</h2><h3 id="4-1-1-安装Docker"><a href="#4-1-1-安装Docker" class="headerlink" title="4.1.1 安装Docker"></a>4.1.1 安装Docker</h3><p>首先,你需要安装docker</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Windows 请自行搜索下载Docker</span><br><span class="line">---</span><br><span class="line">---</span><br><span class="line"># Linux 下,请自行搜索下载Docker</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="4-1-2-Linux-Mac-OS-本地安装"><a href="#4-1-2-Linux-Mac-OS-本地安装" class="headerlink" title="4.1.2 Linux\Mac OS 本地安装"></a>4.1.2 Linux\Mac OS 本地安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 创建目录</span><br><span class="line">mkdir -p xianyu-auto-reply</span><br><span class="line"></span><br><span class="line"># 启动容器</span><br><span class="line">docker run -d \</span><br><span class="line">  -p 8080:8080 \</span><br><span class="line">  -v $PWD/xianyu-auto-reply/:/app/data/ \</span><br><span class="line">  --name xianyu-auto-reply \</span><br><span class="line">  registry.cn-shanghai.aliyuncs.com/zhinian-software/xianyu-auto-reply:1.0</span><br><span class="line">  </span><br><span class="line"># 启动系统</span><br><span class="line"># http://localhost:8080</span><br><span class="line"># http://127.0.0.1:8080</span><br><span class="line"># 上方两个链接均可访问.</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="4-1-3-Windows-本地安装"><a href="#4-1-3-Windows-本地安装" class="headerlink" title="4.1.3 Windows 本地安装"></a>4.1.3 Windows 本地安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 创建数据目录</span><br><span class="line">mkdir xianyu-auto-reply</span><br><span class="line"></span><br><span class="line"># 启动容器</span><br><span class="line">docker run -d -p 8080:8080 -v %cd%/xianyu-auto-reply/:/app/data/ --name xianyu-auto-reply registry.cn-shanghai.aliyuncs.com/zhinian-software/xianyu-auto-reply:1.0</span><br><span class="line"></span><br><span class="line"># 访问系统</span><br><span class="line"># http://localhost:8080</span><br><span class="line"># http://127.0.0.1:8080</span><br><span class="line"># 上方两个链接均可访问.</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="4-1-4-云端安装"><a href="#4-1-4-云端安装" class="headerlink" title="4.1.4 云端安装"></a>4.1.4 云端安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 与上方本地安装方式一致,但需要注意查看云端的ip</span><br><span class="line"># 1.Linux安装net-tools工具套</span><br><span class="line">sudo apt install net-tools # debian系列</span><br><span class="line">sudo yum install net-tools # redhat系列</span><br><span class="line">sudo pacman -Sy net-tools # arch系列</span><br><span class="line"># 2.Windows下无需下载net-tools</span><br><span class="line"># 3.开放防火墙8080端口(不会的看服务器文档)</span><br><span class="line"># 4.通过上方本地安装的教程,进行云端安装</span><br><span class="line"># 5.访问:http://你的ip:8080  进行访问即可</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-2-源码构建部署-推荐资深玩家部署"><a href="#4-2-源码构建部署-推荐资深玩家部署" class="headerlink" title="4.2 源码构建部署(推荐资深玩家部署)"></a>4.2 源码构建部署(推荐资深玩家部署)</h2><h3 id="4-2-1-Linux-MAC-OS-构建"><a href="#4-2-1-Linux-MAC-OS-构建" class="headerlink" title="4.2.1 Linux\MAC OS 构建"></a>4.2.1 Linux\MAC OS 构建</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 需要安装python环境,最好在python3.11以上(自行百度)</span><br><span class="line"># 1. 克隆项目</span><br><span class="line">git clone https://github.com/zhinianboke/xianyu-auto-reply.git</span><br><span class="line">cd xianyu-auto-reply</span><br><span class="line"></span><br><span class="line"># 2. 设置脚本执行权限（Linux/macOS）</span><br><span class="line">chmod +x docker-deploy.sh</span><br><span class="line"></span><br><span class="line"># 3. 一键部署（自动构建镜像）</span><br><span class="line">./docker-deploy.sh</span><br><span class="line"></span><br><span class="line"># 4. 访问系统</span><br><span class="line"># http://localhost:8080</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-2-2-Windows-构建"><a href="#4-2-2-Windows-构建" class="headerlink" title="4.2.2 Windows 构建"></a>4.2.2 Windows 构建</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 需要安装python环境,最好在python3.11以上(自行百度)</span><br><span class="line"># 1. 克隆项目</span><br><span class="line">git clone https://github.com/zhinianboke/xianyu-auto-reply.git</span><br><span class="line">cd xianyu-auto-reply</span><br><span class="line"></span><br><span class="line"># 使用Windows批处理脚本（推荐）</span><br><span class="line">docker-deploy.bat</span><br><span class="line"></span><br><span class="line"># 或者使用Git Bash/WSL</span><br><span class="line">bash docker-deploy.sh</span><br><span class="line"></span><br><span class="line"># 或者直接使用Docker Compose</span><br><span class="line">docker-compose up -d --build</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-3-本地开发部署-推荐想二开的玩家部署"><a href="#4-3-本地开发部署-推荐想二开的玩家部署" class="headerlink" title="4.3 本地开发部署(推荐想二开的玩家部署)"></a>4.3 本地开发部署(推荐想二开的玩家部署)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"># 1. 克隆项目</span><br><span class="line">git clone https://github.com/zhinianboke/xianyu-auto-reply.git</span><br><span class="line">cd xianyu-auto-reply</span><br><span class="line"></span><br><span class="line"># 2. 创建虚拟环境（推荐）</span><br><span class="line">python -m venv venv</span><br><span class="line">source venv/bin/activate  # Linux/macOS</span><br><span class="line"># 或 venv\Scripts\activate  # Windows</span><br><span class="line"></span><br><span class="line"># 3. 安装Python依赖</span><br><span class="line">pip install --upgrade pip</span><br><span class="line">pip install -r requirements.txt</span><br><span class="line"></span><br><span class="line"># 4. 安装Playwright浏览器</span><br><span class="line">playwright install chromium</span><br><span class="line">playwright install-deps chromium  # Linux需要</span><br><span class="line"></span><br><span class="line"># 5. 启动系统</span><br><span class="line">python Start.py</span><br><span class="line"></span><br><span class="line"># 6. 访问系统</span><br><span class="line"># http://localhost:8080# 1. 克隆项目</span><br><span class="line">git clone https://github.com/zhinianboke/xianyu-auto-reply.git</span><br><span class="line">cd xianyu-auto-reply</span><br><span class="line"></span><br><span class="line"># 2. 创建虚拟环境（推荐）</span><br><span class="line">python -m venv venv</span><br><span class="line">source venv/bin/activate  # Linux/macOS</span><br><span class="line"># 或 venv\Scripts\activate  # Windows</span><br><span class="line"></span><br><span class="line"># 3. 安装Python依赖</span><br><span class="line">pip install --upgrade pip</span><br><span class="line">pip install -r requirements.txt</span><br><span class="line"></span><br><span class="line"># 4. 安装Playwright浏览器</span><br><span class="line">playwright install chromium</span><br><span class="line">playwright install-deps chromium  # Linux需要</span><br><span class="line"></span><br><span class="line"># 5. 启动系统</span><br><span class="line">python Start.py</span><br><span class="line"></span><br><span class="line"># 6. 访问系统</span><br><span class="line"># http://localhost:8080</span><br></pre></td></tr></table></figure>
-
+<ul>
+<li>Windows 请自行搜索下载Docker</li>
+</ul>
+<hr>
+<hr>
+<ul>
+<li>Linux 下,请自行搜索下载Docker</li>
+</ul>
+<h3 id="4-1-2-Linux-Mac-OS-本地安装"><a href="#4-1-2-Linux-Mac-OS-本地安装" class="headerlink" title="4.1.2 Linux\Mac OS 本地安装"></a>4.1.2 Linux\Mac OS 本地安装</h3><ul>
+<li><p>创建目录</p>
+</li>
+<li><p>mkdir -p xianyu-auto-reply</p>
+</li>
+<li><p>启动容器</p>
+</li>
+<li><p>docker run -d <br>  -p 8080:8080 <br>  -v $PWD&#x2F;xianyu-auto-reply&#x2F;:&#x2F;app&#x2F;data&#x2F; <br>  –name xianyu-auto-reply <br>  registry.cn-shanghai.aliyuncs.com&#x2F;zhinian-software&#x2F;xianyu-auto-reply:1.0</p>
+</li>
+<li><p>启动系统</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://127.0.0.1:8080/">http://127.0.0.1:8080</a></p>
+</li>
+<li><p>上方两个链接均可访问.</p>
+</li>
+</ul>
+<h3 id="4-1-3-Windows-本地安装"><a href="#4-1-3-Windows-本地安装" class="headerlink" title="4.1.3 Windows 本地安装"></a>4.1.3 Windows 本地安装</h3><ul>
+<li><p>创建数据目录</p>
+</li>
+<li><p>mkdir xianyu-auto-reply</p>
+</li>
+<li><p>启动容器</p>
+</li>
+<li><p>docker run -d -p 8080:8080 -v %cd%&#x2F;xianyu-auto-reply&#x2F;:&#x2F;app&#x2F;data&#x2F; –name xianyu-auto-reply registry.cn-shanghai.aliyuncs.com&#x2F;zhinian-software&#x2F;xianyu-auto-reply:1.0</p>
+</li>
+<li><p>访问系统</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://127.0.0.1:8080/">http://127.0.0.1:8080</a></p>
+</li>
+<li><p>上方两个链接均可访问.</p>
+</li>
+</ul>
+<h3 id="4-1-4-云端安装"><a href="#4-1-4-云端安装" class="headerlink" title="4.1.4 云端安装"></a>4.1.4 云端安装</h3><ul>
+<li>与上方本地安装方式一致,但需要注意查看云端的ip</li>
+<li>1.Linux安装net-tools工具套</li>
+<li>sudo apt install net-tools # debian系列</li>
+<li>sudo yum install net-tools # redhat系列</li>
+<li>sudo pacman -Sy net-tools # arch系列</li>
+<li>2.Windows下无需下载net-tools</li>
+<li>3.开放防火墙8080端口(不会的看服务器文档)</li>
+<li>4.通过上方本地安装的教程,进行云端安装</li>
+<li>5.访问:http:&#x2F;&#x2F;你的ip:8080  进行访问即可</li>
+</ul>
+<h2 id="4-2-源码构建部署-推荐资深玩家部署"><a href="#4-2-源码构建部署-推荐资深玩家部署" class="headerlink" title="4.2 源码构建部署(推荐资深玩家部署)"></a>4.2 源码构建部署(推荐资深玩家部署)</h2><h3 id="4-2-1-Linux-MAC-OS-构建"><a href="#4-2-1-Linux-MAC-OS-构建" class="headerlink" title="4.2.1 Linux\MAC OS 构建"></a>4.2.1 Linux\MAC OS 构建</h3><p>需要安装python环境,最好在python3.11以上(自行百度)</p>
+<ol>
+<li>克隆项目</li>
+</ol>
+<ul>
+<li>git clone <a target="_blank" rel="noopener" href="https://github.com/zhinianboke/xianyu-auto-reply.git">https://github.com/zhinianboke/xianyu-auto-reply.git</a></li>
+<li>cd xianyu-auto-reply</li>
+</ul>
+<ol start="2">
+<li>设置脚本执行权限（Linux&#x2F;macOS）</li>
+</ol>
+<ul>
+<li>chmod +x docker-deploy.sh</li>
+</ul>
+<ol start="3">
+<li>一键部署（自动构建镜像）</li>
+</ol>
+<ul>
+<li>.&#x2F;docker-deploy.sh</li>
+</ul>
+<ol start="4">
+<li>访问系统</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></li>
+</ul>
+<h3 id="4-2-2-Windows-构建"><a href="#4-2-2-Windows-构建" class="headerlink" title="4.2.2 Windows 构建"></a>4.2.2 Windows 构建</h3><p> 需要安装python环境,最好在python3.11以上(自行百度)</p>
+<ul>
+<li><p>克隆项目</p>
+</li>
+<li><p>git clone <a target="_blank" rel="noopener" href="https://github.com/zhinianboke/xianyu-auto-reply.git">https://github.com/zhinianboke/xianyu-auto-reply.git</a></p>
+</li>
+<li><p>cd xianyu-auto-reply</p>
+</li>
+<li><p>使用Windows批处理脚本（推荐）</p>
+</li>
+<li><p>docker-deploy.bat</p>
+</li>
+<li><p>或者使用Git Bash&#x2F;WSL</p>
+</li>
+<li><p>bash docker-deploy.sh</p>
+</li>
+<li><p>或者直接使用Docker Compose</p>
+</li>
+<li><p>docker-compose up -d –build</p>
+</li>
+</ul>
 <h1 id="5-核心功能以及演示"><a href="#5-核心功能以及演示" class="headerlink" title="5-核心功能以及演示"></a>5-核心功能以及演示</h1><h2 id="5-1-核心功能"><a href="#5-1-核心功能" class="headerlink" title="5.1 核心功能"></a>5.1 核心功能</h2><h3 id="🚀-自动回复系统"><a href="#🚀-自动回复系统" class="headerlink" title="🚀 自动回复系统"></a>🚀 自动回复系统</h3><ul>
 <li><strong>智能关键词匹配</strong> - 支持精确匹配和模糊匹配，灵活配置回复规则</li>
 <li><strong>AI智能回复</strong> - 集成多种AI模型（通义千问、GPT等），智能理解用户意图</li>
