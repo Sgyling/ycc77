@@ -1,200 +1,165 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Save Multiple URLs_快速获取网页中URL的浏览器插件 | 杨CC 技术录</title><meta name="author" content="杨CC"><meta name="copyright" content="杨CC"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JSAPIscan_一个速度很快的js和API的扫描工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Save Multiple URLs_快速获取网页中URL的浏览器插件">
+<meta property="og:url" content="https://ycc77.com/2025/08/22/3-Svae%20Multiple%20URLs_%E5%BF%AB%E9%80%9F%E4%BF%9D%E5%AD%98%E5%BD%93%E5%89%8D%E6%89%80%E6%9C%89%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E7%9A%84URL/index.html">
+<meta property="og:site_name" content="杨CC 技术录">
+<meta property="og:description" content="JSAPIscan_一个速度很快的js和API的扫描工具">
+<meta property="og:locale">
+<meta property="og:image" content="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png">
+<meta property="article:published_time" content="2025-08-22T12:26:30.000Z">
+<meta property="article:modified_time" content="2025-08-23T06:51:45.621Z">
+<meta property="article:author" content="杨CC">
+<meta property="article:tag" content="浏览器插件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Save Multiple URLs_快速获取网页中URL的浏览器插件",
+  "url": "https://ycc77.com/2025/08/22/3-Svae%20Multiple%20URLs_%E5%BF%AB%E9%80%9F%E4%BF%9D%E5%AD%98%E5%BD%93%E5%89%8D%E6%89%80%E6%9C%89%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E7%9A%84URL/",
+  "image": "https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png",
+  "datePublished": "2025-08-22T12:26:30.000Z",
+  "dateModified": "2025-08-23T06:51:45.621Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "杨CC",
+      "url": "https://Ycc77.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png"><link rel="canonical" href="https://ycc77.com/2025/08/22/3-Svae%20Multiple%20URLs_%E5%BF%AB%E9%80%9F%E4%BF%9D%E5%AD%98%E5%BD%93%E5%89%8D%E6%89%80%E6%9C%89%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E7%9A%84URL/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="utf-8" />
-    <title>Save Multiple URLs_快速获取网页中URL的浏览器插件 | 杨CC 技术录</title>
-    <meta name="author" content="杨CC" />
-    <meta name="description" content="这是一个非常不错的技术文章站点,包含森罗万物" />
-    <meta name="keywords" content="黑客,技术,技术文章,渗透工具,发展中，疯狂的杨CC， ..." />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <link rel="icon" href="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" />
-    <link rel="preconnect" href="https://s4.zstatic.net" />
-<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<link rel="preconnect" href="https://fonts.googleapis.cn" />
-<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
-<link
-    rel="stylesheet"
-    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
-/>
-<script> const mixins = {}; </script>
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
-<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-
-<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
-
-
-
-<script src="/js/lib/preview.js"></script>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.css" />
-
-<meta name="generator" content="Hexo 7.3.0"></head>
-<body>
-    <div id="layout">
-        <transition name="fade">
-            <div id="loading" v-show="loading">
-                <div id="loading-circle">
-                    <h2>LOADING</h2>
-                    <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
-                </div>
-            </div>
-        </transition>
-        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
-    <nav id="desktop-menu">
-        <a class="title" href="/">
-            <span>杨CC 技术录</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;首页</span>
-        </a>
-        
-        <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;归档</span>
-        </a>
-        
-        <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;分类</span>
-        </a>
-        
-        <a href="/tags/">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;标签</span>
-        </a>
-        
-        <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;关于我</span>
-        </a>
-        
-    </nav>
-    <nav id="mobile-menu">
-        <div class="title" @click="showMenuItems = !showMenuItems">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;杨CC 技术录</span>
-        </div>
-        <transition name="slide">
-            <div class="items" v-show="showMenuItems">
-                
-                <a href="/">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-house fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
-                    </div>
-                </a>
-                
-                <a href="/archives">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-box-archive fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
-                    </div>
-                </a>
-                
-                <a href="/categories">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
-                    </div>
-                </a>
-                
-                <a href="/tags/">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
-                    </div>
-                </a>
-                
-                <a href="/about">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-id-card fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于我</div>
-                    </div>
-                </a>
-                
-            </div>
-        </transition>
-    </nav>
-</div>
-<transition name="fade">
-    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
-</transition>
-
-        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>Save Multiple URLs_快速获取网页中URL的浏览器插件</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/8/22
-        </span>
-        
-        <span class="category">
-            <a href="/categories/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                渗透工具
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/" style="color: #ff7d73">
-                    浏览器插件
-                </a>
-            </span>
-            
-        </span>
-        
-    </div>
+      const theme = saveToLocal.get('theme')
     
-    <div class="content" v-pre>
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1- 简介"></a>1- 简介</h1><p>​	Save Multiple URLs 是一个专为渗透测试人员、红队工程师、网络安全研究者打造的浏览器插件，便于快速保存当前所有打开的网页 URL，避免在测试过程中遗漏关键目标。</p>
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Save Multiple URLs_快速获取网页中URL的浏览器插件',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" alt="Logo"><span class="site-name">杨CC 技术录</span></a><a class="nav-page-title" href="/"><span class="site-name">Save Multiple URLs_快速获取网页中URL的浏览器插件</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Save Multiple URLs_快速获取网页中URL的浏览器插件</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-08-22T12:26:30.000Z" title="Created 2025-08-22 20:26:30">2025-08-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-08-23T06:51:45.621Z" title="Updated 2025-08-23 14:51:45">2025-08-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/">渗透工具</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1- 简介"></a>1- 简介</h1><p>​	Save Multiple URLs 是一个专为渗透测试人员、红队工程师、网络安全研究者打造的浏览器插件，便于快速保存当前所有打开的网页 URL，避免在测试过程中遗漏关键目标。</p>
 <h1 id="2-功能特点"><a href="#2-功能特点" class="headerlink" title="2- 功能特点"></a>2- 功能特点</h1><ul>
 <li>✅ 一键获取当前所有浏览器标签页的 URL</li>
 <li>✅ 支持复制 URL 到剪贴板</li>
@@ -222,52 +187,10 @@
 <li>快手: 疯狂的杨CC</li>
 <li>P站: 疯狂的杨CC</li>
 </ul>
-
-    </div>
-    
-    
-    
-    
-    
-    
-    
-</div>
-
-            <footer id="footer">
-    <div id="footer-wrap">
-        <div>
-            &copy;
-            2022 - 2025 杨CC 技术录
-            <span id="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            &commat;杨CC
-        </div>
-        <div>
-            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
-            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
-        </div>
-        
-    </div>
-    <script async src="https://0198bc58-ac63-71ed-a536-46941550f9e1.ustat1.com/ustat.js"></script>
-</footer>
-
-        </div>
-        
-        <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-        </transition>
-        
-    </div>
-    <script src="/js/main.js"></script>
-    
-    
-
-
-
-
-    
-</body>
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://Ycc77.com">杨CC</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://ycc77.com/2025/08/22/3-Svae%20Multiple%20URLs_%E5%BF%AB%E9%80%9F%E4%BF%9D%E5%AD%98%E5%BD%93%E5%89%8D%E6%89%80%E6%9C%89%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E7%9A%84URL/">https://ycc77.com/2025/08/22/3-Svae%20Multiple%20URLs_%E5%BF%AB%E9%80%9F%E4%BF%9D%E5%AD%98%E5%BD%93%E5%89%8D%E6%89%80%E6%9C%89%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E7%9A%84URL/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/">浏览器插件</a></div><div class="post-share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/08/23/4-%E5%B9%BB%E5%BD%B1(Phantom)Src%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7/" title="幻影（Phantom）SRC漏洞挖掘辅助工具"><img class="cover" src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">幻影（Phantom）SRC漏洞挖掘辅助工具</div></div><div class="info-2"><div class="info-item-1">1- 简介​	主要用于SRC的漏洞挖掘. ​	所处位置:https://yancy77.cn/penetration.html  -&gt; 插件\扩展板块 -&gt;幻影(Phantom) SRC漏洞挖掘辅助工具 2- 特性概览 一键基础扫描：自动提取页面内的API、URL、域名、邮箱、手机号、路径、参数、注释、多类Token&#x2F;Key等 深度梯度扫描：梯度链接&#x2F;资源爬取，支持梯度、超时配置，并在新闻中运行，不阻塞当前操作 批量API测试：对扫描到的分类入口进行GET&#x2F;POST批量测量，并发与超时可配置，结果支持复制 导出能力：支持JSON与Excel（.xls XML格式）两种导出 自定义规则则：内置丰富的默认规则，可在「设置」中按分类自定义规则则并即时生效 Cookie支持：可一键获取当前站点Cookie并保存，然后需要鉴权的请求场景 去重与过滤：内置强化过滤器（域名&#x2F;邮箱&#x2F;手机号&#x2F;API），减少误报 自动与增量：页面加载、DOM变化与定时策略触发静默扫描；深度扫描过程中分层&#x2F;分批实时合并与展示  3- 安...</div></div></div></a><a class="pagination-related" href="/2025/08/22/2-JSAPlscan-JS%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7/" title="JSAPIscan 扫描工具_安装以及使用"><img class="cover" src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">JSAPIscan 扫描工具_安装以及使用</div></div><div class="info-2"><div class="info-item-1">1-简介​	注意: 该软件非开源软件,请自行掂量. ​	一个go语言开发的js文件发现和接口扫描工具，专门用于从JavaScript文件中提取API接口信息并进行安全测试。 2-功能特性 🔍 智能API发现: 自动从JavaScript文件中提取API端点路径 📱 多框架支持: 支持Webpack、Vue、React等现代前端框架的JS文件解析 🚀 高性能扫描: 多线程并发处理，支持自定义线程数 🛡️ 安全测试: 内置未授权访问测试和POC验证功能（POC预计0.3开放） 📊 智能输出: 自动生成CSV报告和详细日志 🔧 灵活配置: 支持批量URL扫描、自定义深度等 📁 自动管理: 自动创建时间戳文件夹，结果分类存储  3-下载安装​	浏览器访问：https://pan.quark.cn/s/67b7123b8cbf ​	此链接包含Windows\Linux 双版本,下载后可直接进行使用. 4-使用教程4.1 Linux 使用教程1.\JSAPIscan_linux -h # 查看帮助   4.2 Windows 使用教程1JSAPIscan_windows.exe...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/08/23/4-%E5%B9%BB%E5%BD%B1(Phantom)Src%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7/" title="幻影（Phantom）SRC漏洞挖掘辅助工具"><img class="cover" src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-23</div><div class="info-item-2">幻影（Phantom）SRC漏洞挖掘辅助工具</div></div><div class="info-2"><div class="info-item-1">1- 简介​	主要用于SRC的漏洞挖掘. ​	所处位置:https://yancy77.cn/penetration.html  -&gt; 插件\扩展板块 -&gt;幻影(Phantom) SRC漏洞挖掘辅助工具 2- 特性概览 一键基础扫描：自动提取页面内的API、URL、域名、邮箱、手机号、路径、参数、注释、多类Token&#x2F;Key等 深度梯度扫描：梯度链接&#x2F;资源爬取，支持梯度、超时配置，并在新闻中运行，不阻塞当前操作 批量API测试：对扫描到的分类入口进行GET&#x2F;POST批量测量，并发与超时可配置，结果支持复制 导出能力：支持JSON与Excel（.xls XML格式）两种导出 自定义规则则：内置丰富的默认规则，可在「设置」中按分类自定义规则则并即时生效 Cookie支持：可一键获取当前站点Cookie并保存，然后需要鉴权的请求场景 去重与过滤：内置强化过滤器（域名&#x2F;邮箱&#x2F;手机号&#x2F;API），减少误报 自动与增量：页面加载、DOM变化与定时策略触发静默扫描；深度扫描过程中分层&#x2F;分批实时合并与展示  3- 安...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">杨CC</div><div class="author-info-description">这是一个非常不错的技术文章站点,包含森罗万物</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SGYLING"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Sgyling" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">有任何疑惑或者需要投稿,请联系:<br>
+微信: Yancy_76<br>
+或 QQ: 1041041042 <br>
+QQ交流群: 660264846 <br>
+你们会请我喝咖啡的对吧?<br>
+<img src="img/cb5a3c6810a8b8939c072f73afab3144.jpg" style="width:200px;">
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">1- 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">2- 功能特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.</span> <span class="toc-text">3- 使用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E6%88%AA%E5%9B%BE"><span class="toc-number">4.</span> <span class="toc-text">4- 使用截图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">5- 安装方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E7%BB%93%E6%9D%9F%E8%AF%AD"><span class="toc-number">6.</span> <span class="toc-text">6- 结束语</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/23/4-%E5%B9%BB%E5%BD%B1(Phantom)Src%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7/" title="幻影（Phantom）SRC漏洞挖掘辅助工具"><img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="幻影（Phantom）SRC漏洞挖掘辅助工具"/></a><div class="content"><a class="title" href="/2025/08/23/4-%E5%B9%BB%E5%BD%B1(Phantom)Src%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7/" title="幻影（Phantom）SRC漏洞挖掘辅助工具">幻影（Phantom）SRC漏洞挖掘辅助工具</a><time datetime="2025-08-23T12:26:30.000Z" title="Created 2025-08-23 20:26:30">2025-08-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/22/3-Svae%20Multiple%20URLs_%E5%BF%AB%E9%80%9F%E4%BF%9D%E5%AD%98%E5%BD%93%E5%89%8D%E6%89%80%E6%9C%89%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E7%9A%84URL/" title="Save Multiple URLs_快速获取网页中URL的浏览器插件"><img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Save Multiple URLs_快速获取网页中URL的浏览器插件"/></a><div class="content"><a class="title" href="/2025/08/22/3-Svae%20Multiple%20URLs_%E5%BF%AB%E9%80%9F%E4%BF%9D%E5%AD%98%E5%BD%93%E5%89%8D%E6%89%80%E6%9C%89%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E7%9A%84URL/" title="Save Multiple URLs_快速获取网页中URL的浏览器插件">Save Multiple URLs_快速获取网页中URL的浏览器插件</a><time datetime="2025-08-22T12:26:30.000Z" title="Created 2025-08-22 20:26:30">2025-08-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/22/2-JSAPlscan-JS%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7/" title="JSAPIscan 扫描工具_安装以及使用"><img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JSAPIscan 扫描工具_安装以及使用"/></a><div class="content"><a class="title" href="/2025/08/22/2-JSAPlscan-JS%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7/" title="JSAPIscan 扫描工具_安装以及使用">JSAPIscan 扫描工具_安装以及使用</a><time datetime="2025-08-22T09:26:30.000Z" title="Created 2025-08-22 17:26:30">2025-08-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/21/1-%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B71_%E5%92%B8%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/" title="一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程"><img src="https://pic1.imgdb.cn/item/68a725f358cb8da5c84137f9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程"/></a><div class="content"><a class="title" href="/2025/08/21/1-%E7%94%B5%E5%95%86%E5%B7%A5%E5%85%B71_%E5%92%B8%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/" title="一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程">一款支持闲鱼自动回复\自动发货的神奇工具-带安装教程</a><time datetime="2025-08-21T09:26:30.000Z" title="Created 2025-08-21 17:26:30">2025-08-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/" title="测试文章"><img src="https://pic1.imgdb.cn/item/68a3e56758cb8da5c834abbf.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试文章"/></a><div class="content"><a class="title" href="/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/" title="测试文章">测试文章</a><time datetime="2025-08-20T09:26:30.000Z" title="Created 2025-08-20 17:26:30">2025-08-20</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By 杨CC</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
