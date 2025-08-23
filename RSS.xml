@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ycc77.com/link/index.html</loc>
+    
+    <lastmod>2025-08-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ycc77.com/tags/index.html</loc>
+    
+    <lastmod>2025-08-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ycc77.com/2025/08/23/4-%E5%B9%BB%E5%BD%B1(Phantom)Src%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7/</loc>
     
     <lastmod>2025-08-23</lastmod>
@@ -41,15 +59,6 @@
     <loc>https://ycc77.com/2025/08/20/google-chrome-%E5%8F%96%E8%AF%81/</loc>
     
     <lastmod>2025-08-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ycc77.com/tags/index.html</loc>
-    
-    <lastmod>2025-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -115,14 +124,14 @@
   </url>
   
   <url>
-    <loc>https://ycc77.com/tags/%E9%97%B2%E9%B1%BC/</loc>
+    <loc>https://ycc77.com/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</loc>
     <lastmod>2025-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://ycc77.com/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</loc>
+    <loc>https://ycc77.com/tags/%E9%97%B2%E9%B1%BC/</loc>
     <lastmod>2025-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
